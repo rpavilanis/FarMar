@@ -18,7 +18,8 @@ attr_reader :id, :name_of_market, :address, :city, :county, :state, :zip
   end
 
 # reads in CSV file
-def self.markets
+# returns a collection of markets
+def self.all?
 
   @@markets = []
   market_hash = {}
@@ -32,13 +33,10 @@ def self.markets
     market_hash[:state] = line[5]
     market_hash[:zip] = line[6]
     @@markets << FarMar::Market.new(market_hash)
+
+    return @@markets
   end
 end
-
-# returns a collection of markets
-  def self.all?
-    ap @@markets
-  end
 
 # returns an instance of object where value of id field in the CSV matches passed parameter
   def self.find(id_num)
