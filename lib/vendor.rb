@@ -3,28 +3,43 @@ require_relative "../far_mar.rb"
 
 class FarMar::Vendor
 
-attr_accessor
-attr_reader
+attr_accessor :vendors
+attr_reader :id, :vendor_name, :market_id, :num_employees
 
-  def initialize
+# initializes vendor_hash
+  def initialize(vendor_hash)
+    @id = vendor_hash[:id]
+    @vendor_name = vendor_hash[:vendor_name]
+    @num_employees = vendor_hash[:num_employees]
+    @market_id = vendor_hash[:market_id]
   end
 
+# reads in CSV file
 # returns a collection of markets
-  def self.all?
-    # ap @@(name of array holding hashes)
+def self.all?
+
+  @@vendors = []
+  vendor_hash = {}
+
+  CSV.open("./support/vendors.csv", 'r').each do |line|
+    vendor_hash[:id] = line[0].to_i
+    vendor_hash[:vendor_name] = line[1]
+    vendor_hash[:num_employees] = line[2]
+    vendor_hash[:market_id] = line[3]
+    @@vendors << FarMar::Vendor.new(vendor_hash)
+
+    return @@vendors
   end
+end
 
 # returns an instance of object where value of id field in the CSV matches passed parameter
-  def self.find(id)
-    # Sample code to use from BankAccount
-    #  @@users.each do |user|
-    #   if user.owner_ID == id_number
-    #     matching_account = user
-    #     puts "That matches an ID in our system. Here is your account information."
-    #     return ap matching_account
-    #   end
-    # end
-    # puts "That ID does not match any users in our system."
+  def self.find(id_num)
+    @@vendors.each do |vendor|
+      if vendor.id == id_num
+        matching_vendor = market
+        return matching_vendor
+      end
+    end
   end
 
   def market
