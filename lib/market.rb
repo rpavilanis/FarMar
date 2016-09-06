@@ -21,7 +21,7 @@ attr_reader :id, :name_of_market, :address, :city, :county, :state, :zip
 # returns a collection of markets
 def self.all?
 
-  @@markets = []
+  markets = []
   market_hash = {}
 
   CSV.open("./support/markets.csv", 'r').each do |line|
@@ -32,15 +32,16 @@ def self.all?
     market_hash[:county] = line[4]
     market_hash[:state] = line[5]
     market_hash[:zip] = line[6]
-    @@markets << FarMar::Market.new(market_hash)
-
-    return @@markets
+    markets << FarMar::Market.new(market_hash)
   end
+
+  return markets
 end
 
 # returns an instance of object where value of id field in the CSV matches passed parameter
   def self.find(id_num)
-    @@markets.each do |market|
+    market_array = FarMar::Market.all?
+    market_array.each do |market|
       if market.id == id_num
         matching_market = market
         return matching_market

@@ -15,7 +15,7 @@ describe FarMar::Vendor do
 #2
   it "Makes sure you can return appropriate vendor when given id" do
     FarMar::Vendor.all?
-    random_number = rand(1..500)
+    random_number = rand(1..2690)
     FarMar::Vendor.find(random_number)
     expect(random_number).must_equal(@id =  random_number)
   end
@@ -28,5 +28,12 @@ describe FarMar::Vendor do
     expect(vendor1.class).must_equal(FarMar::Vendor)
     expect(vendors_array.class).must_equal(Array)
   end
+
+# 4
+  it "Makes sure that file you read in is appropriate length" do
+    array = FarMar::Vendor.all?
+    expect(array.length).must_equal(2690)
+  end
+
 
 end

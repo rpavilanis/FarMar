@@ -2,28 +2,42 @@ require_relative "../far_mar.rb"
 
 class FarMar::Product
 
-attr_accessor
-attr_reader
+attr_accessor :products
+attr_reader :id, :product_name, :vendor_id
 
-  def initialize
+# initializes product_hash
+  def initialize(product_hash)
+    @id = product_hash[:id]
+    @product_name = product_hash[:product_name]
+    @vendor_id = product_hash[:vendor_id]
   end
 
+# reads in CSV file
 # returns a collection of markets
-  def self.all?
-    # ap @@(name of array holding hashes)
+def self.all?
+
+  products = []
+  product_hash = {}
+
+  CSV.open("./support/products.csv", 'r').each do |line|
+    product_hash[:id] = line[0].to_i
+    product_hash[:product_name] = line[1]
+    product_hash[:vendor_id] = line[2].to_i
+    products << FarMar::Product.new(product_hash)
   end
+
+  return products
+end
 
 # returns an instance of object where value of id field in the CSV matches passed parameter
-  def self.find(id)
-    # Sample code to use from BankAccount
-    #  @@users.each do |user|
-    #   if user.owner_ID == id_number
-    #     matching_account = user
-    #     puts "That matches an ID in our system. Here is your account information."
-    #     return ap matching_account
-    #   end
-    # end
-    # puts "That ID does not match any users in our system."
+  def self.find(id_num)
+    products_array = FarMar::Product.all?
+    products_array.each do |product|
+      if product.id == id_num
+        matching_product = product
+        return matching_product
+      end
+    end
   end
 
   def vendor

@@ -31,4 +31,11 @@ describe FarMar::Market do
     expect(markets_array.class).must_equal(Array)
   end
 
+# 4
+  it "Makes sure that file you read in is appropriate length" do
+    array = FarMar::Market.all?
+    expect(array.length).must_equal(500)
+  end
+
+
 end

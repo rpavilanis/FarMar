@@ -18,25 +18,26 @@ attr_reader :id, :vendor_name, :market_id, :num_employees
 # returns a collection of markets
 def self.all?
 
-  @@vendors = []
+  vendor = []
   vendor_hash = {}
 
   CSV.open("./support/vendors.csv", 'r').each do |line|
     vendor_hash[:id] = line[0].to_i
     vendor_hash[:vendor_name] = line[1]
-    vendor_hash[:num_employees] = line[2]
-    vendor_hash[:market_id] = line[3]
-    @@vendors << FarMar::Vendor.new(vendor_hash)
-
-    return @@vendors
+    vendor_hash[:num_employees] = line[2].to_i
+    vendor_hash[:market_id] = line[3].to_i
+    vendor << FarMar::Vendor.new(vendor_hash)
   end
+
+  return vendor
 end
 
 # returns an instance of object where value of id field in the CSV matches passed parameter
   def self.find(id_num)
-    @@vendors.each do |vendor|
+    vendor_array = FarMar::Vendor.all?
+    vendor_array.each do |vendor|
       if vendor.id == id_num
-        matching_vendor = market
+        matching_vendor = vendor
         return matching_vendor
       end
     end
