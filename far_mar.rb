@@ -2,6 +2,7 @@
 # gems
 require 'csv'
 require 'awesome_print'
+# consider using chronic or time gem??
 
 module FarMar
 
