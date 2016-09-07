@@ -49,5 +49,12 @@ describe FarMar::Product do
     expect(vendor1.vendor_name).must_equal("Stamm Inc")
   end
 
+#7
+  it "Sales method returns a collection of FarMar::Sale instances that are associated using the FarMar::Sale product_id field." do
+    product1 = FarMar::Product.new({id: 9, product_name: "egg cartons", vendor_id: 8})
+    product_sales_array = product1.sales
+    expect(product_sales_array.length).must_equal(3)
+  end
+
 
 end

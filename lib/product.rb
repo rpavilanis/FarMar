@@ -52,6 +52,14 @@ end
 
 # returns a collection of FarMar::Sale instances that are associated using the FarMar::Sale product_id field.
   def sales
+    matching_sales_array = []
+    sales_array = FarMar::Sale.all?
+    sales_array.each do |sale|
+      if sale.product_id == id
+        matching_sales_array << sale
+      end
+    end
+    return matching_sales_array
   end
 
 # returns the number of times this product has been sold.
