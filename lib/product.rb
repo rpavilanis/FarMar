@@ -50,9 +50,11 @@ end
     end
   end
 
+# returns a collection of FarMar::Sale instances that are associated using the FarMar::Sale product_id field.
   def sales
   end
 
+# returns the number of times this product has been sold.
   def number_of_sales
   end
 

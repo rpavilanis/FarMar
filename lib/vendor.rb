@@ -60,6 +60,14 @@ end
 
 # returns a collection of FarMar::Sale instances that are associated by the vendor_id field.
   def sales
+    matching_sales_array = []
+    sales_array = FarMar::Sale.all?
+    sales_array.each do |sale|
+      if sale.vendor_id == id
+        matching_sales_array << sale
+      end
+    end
+    return matching_sales_array
   end
 
 # returns the the sum of all of the vendor's sales (in cents)

@@ -58,4 +58,11 @@ describe FarMar::Vendor do
     expect(products_array.length).must_equal(4)
   end
 
+#8
+  it "Sales method returns a collection of FarMar::Sale instances that were made by a specific vendor" do
+    vendor2 = FarMar::Vendor.new({id: 7, name: "Matthew Pavilanis", num_employees: 1, market_id: 2})
+    vendor_sales_array = vendor2.sales
+    expect(vendor_sales_array.length).must_equal(7)
+  end
+
 end
