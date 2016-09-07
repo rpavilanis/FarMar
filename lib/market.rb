@@ -50,9 +50,8 @@ end
   end
 
   def vendors
+    # for a specific market object, find the vendors who sell at it (so don't pass anything in)
+
   end
 
 end
-#
-# FarMar::Market.markets
-# FarMar::Market.find(2)

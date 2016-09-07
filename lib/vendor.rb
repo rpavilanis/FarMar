@@ -1,6 +1,5 @@
 require_relative "../far_mar.rb"
 
-
 class FarMar::Vendor
 
 attr_accessor :vendors
@@ -34,13 +33,14 @@ end
 
 # returns an instance of object where value of id field in the CSV matches passed parameter
   def self.find(id_num)
+    matching_vendor = []
     vendor_array = FarMar::Vendor.all?
     vendor_array.each do |vendor|
       if vendor.id == id_num
         matching_vendor = vendor
-        return matching_vendor
       end
     end
+    return matching_vendor
   end
 
   def market
@@ -56,10 +56,15 @@ end
   end
 
   def self.by_market(market_id)
+    matching_vendor_array = []
+    vendor_array = FarMar::Vendor.all?
+    vendor_array.each do |vendor|
+      if vendor.market_id == market_id
+        matching_vendor_array << vendor
+      end
+    end
+    return matching_vendor_array
   end
-
-
-
 
 
 end
