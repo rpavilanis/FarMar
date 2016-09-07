@@ -72,6 +72,11 @@ end
 
 # returns the the sum of all of the vendor's sales (in cents)
   def revenue
+    total_vendor_sales = 0
+    sales.each do |sale|
+      total_vendor_sales += sale.amount
+    end
+    return total_vendor_sales
   end
 
 # returns all of the vendors with the given market_id

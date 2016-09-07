@@ -65,4 +65,11 @@ describe FarMar::Vendor do
     expect(vendor_sales_array.length).must_equal(7)
   end
 
+#9
+  it "Revenue method returns the the sum of all of a specific vendor's sales (in cents)" do
+  vendor2 = FarMar::Vendor.new({id: 8, name: "Matthew Pavilanis", num_employees: 1, market_id: 2})
+  expect(vendor2.revenue).must_equal(56038)
+
+  end 
+
 end
