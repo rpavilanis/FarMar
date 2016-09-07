@@ -51,7 +51,7 @@ describe FarMar::Vendor do
   end
 
 #7
-  it "Vendor method returns a list of vendors with market ID" do
+  it "Products method returns a list of products sold by a specific vendor" do
     vendor2 = FarMar::Vendor.new({id: 8, name: "Matthew Pavilanis", num_employees: 1, market_id: 2})
     products_array = []
     products_array = vendor2.products
