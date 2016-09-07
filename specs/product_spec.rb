@@ -56,5 +56,12 @@ describe FarMar::Product do
     expect(product_sales_array.length).must_equal(3)
   end
 
+#8
+  it "Number_of_sales method returns the number of sales made of a specific product" do
+  product1 = FarMar::Product.new({id: 14, product_name: "egg cartons", vendor_id: 8})
+  expect(product1.number_of_sales).must_equal(7)
+
+  end
+
 
 end

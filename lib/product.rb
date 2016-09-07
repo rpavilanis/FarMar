@@ -64,6 +64,11 @@ end
 
 # returns the number of times this product has been sold.
   def number_of_sales
+    total_sales = 0
+    sales.each do |sale|
+      total_sales += 1
+    end
+    return total_sales
   end
 
 # returns all of the products with the given vendor_id
