@@ -43,5 +43,7 @@ describe FarMar::Vendor do
     expect(vendors_at_market.length).must_equal(3)
   end
 
+#6
+  
 
 end

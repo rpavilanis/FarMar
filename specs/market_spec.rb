@@ -37,5 +37,12 @@ describe FarMar::Market do
     expect(array.length).must_equal(500)
   end
 
+#5
+  it "Vendor method returns a list of vendors with market ID" do
+    market1 = FarMar::Market.new({id: 1, name_of_market: "Eugene Farmers Market", address: "1300 Oak Street", city: "Eugene", county: "Lane", state: "Oregon", zip: "97405"})
+    vendors_array = []
+    vendors_array = market1.vendors
+    expect(vendors_array.length).must_equal(6)
+  end
 
 end

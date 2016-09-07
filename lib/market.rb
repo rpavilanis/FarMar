@@ -49,9 +49,9 @@ end
     end
   end
 
+# for a specific market object, find the vendors who sell at it (so don't pass anything in)
   def vendors
-    # for a specific market object, find the vendors who sell at it (so don't pass anything in)
-
+    FarMar::Vendor.by_market(id)
   end
 
 end
