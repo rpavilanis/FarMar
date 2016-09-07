@@ -57,6 +57,12 @@ class FarMar::Sale
 
 # returns the FarMar::Product instance that is associated with this sale using the FarMar::Sale product_id field
   def product
+    product_array = FarMar::Product.all?
+    product_array.each do |product|
+      if product.id == product_id
+        return product
+      end
+    end
   end
 
   def self.between(beginning_time, end_time)

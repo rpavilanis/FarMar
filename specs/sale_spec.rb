@@ -40,5 +40,10 @@ describe FarMar::Sale do
     vendor1 = sale1.vendor
     expect(vendor1.vendor_name).must_equal("Kertzmann LLC")
   end
-
+#6
+  it "Product method finds the FarMar::Product instance that is associated with a given sale using the FarMar::Sale product_id field" do
+    sale1 = FarMar::Sale.new({id: 2000, amount: 25.10, vendor_id: 10, product_id: 20})
+    product1 = sale1.product
+    expect(product1.product_name).must_equal("Tall Pretzel")
+  end
 end
