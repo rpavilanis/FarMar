@@ -40,7 +40,14 @@ end
     end
   end
 
+# returns the FarMar::Vendor instance that is associated with this vendor using the FarMar::Product vendor_id field
   def vendor
+    vendor_array = FarMar::Vendor.all?
+    vendor_array.each do |vendor|
+      if vendor.id == vendor_id
+        return vendor
+      end
+    end
   end
 
   def sales

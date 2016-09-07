@@ -42,4 +42,12 @@ describe FarMar::Product do
     expect(products_by_vendor.length).must_equal(3)
   end
 
+#6
+  it "Vendor method finds the appropriate vendor's information for a given product" do
+    product1 = FarMar::Product.new({id: 501, product_name: "egg cartons", vendor_id: 8})
+    vendor1 = product1.vendor
+    expect(vendor1.vendor_name).must_equal("Stamm Inc")
+  end
+
+
 end
