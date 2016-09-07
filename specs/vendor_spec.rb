@@ -21,7 +21,7 @@ describe FarMar::Vendor do
   end
 
 # 3
-  it "Makes sure that multiple instances of vendor are an array" do
+  it "Makes sure that multiple instances of created vendors are stored in an array" do
     vendor1 = FarMar::Vendor.new({id: 501, name: "Rachel Pavilanis", num_employees: 1, market_id: 502})
     vendor2 = FarMar::Vendor.new({id: 502, name: "Matthew Pavilanis", num_employees: 1, market_id: 503})
     vendors_array = [vendor1, vendor2]
@@ -30,9 +30,17 @@ describe FarMar::Vendor do
   end
 
 # 4
-  it "Makes sure that file you read in is appropriate length" do
+  it "Makes sure that csv file you read in is appropriate length" do
     array = FarMar::Vendor.all?
     expect(array.length).must_equal(2690)
+  end
+
+#5
+  it "Makes sure you can return appropriate number of vendors in an array when given a market id" do
+    FarMar::Vendor.all?
+    vendors_at_market = FarMar::Vendor.by_market(2)
+    expect(vendors_at_market.class).must_equal(Array)
+    expect(vendors_at_market.length).must_equal(3)
   end
 
 
