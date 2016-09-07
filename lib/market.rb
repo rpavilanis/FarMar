@@ -40,13 +40,14 @@ end
 
 # returns an instance of object where value of id field in the CSV matches passed parameter
   def self.find(id_num)
+    matching_market = []
     market_array = FarMar::Market.all?
     market_array.each do |market|
       if market.id == id_num
         matching_market = market
-        return matching_market
       end
     end
+   return matching_market
   end
 
 # for a specific market object, find the vendors who sell at it (so don't pass anything in)

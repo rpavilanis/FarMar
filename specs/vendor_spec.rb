@@ -44,6 +44,10 @@ describe FarMar::Vendor do
   end
 
 #6
-  
+  it "Market method finds the appropriate market's information for a given vendor" do
+    vendor2 = FarMar::Vendor.new({id: 502, name: "Matthew Pavilanis", num_employees: 1, market_id: 2})
+    market1 = vendor2.market
+    expect(market1.name_of_market).must_equal("Silverdale Farmers Market")
+  end
 
 end

@@ -43,15 +43,25 @@ end
     return matching_vendor
   end
 
+# matches the FarMar::Vendor market_id field with appropriate id in FarMar::Market
   def market
+    market_array = FarMar::Market.all?
+    market_array.each do |market|
+      if market.id == market_id
+        return market
+      end
+    end
   end
 
+# returns a collection of FarMar::Product instances that are associated by the FarMar::Product vendor_id field.
   def products
   end
 
+# returns a collection of FarMar::Sale instances that are associated by the vendor_id field.
   def sales
   end
 
+# returns the the sum of all of the vendor's sales (in cents)
   def revenue
   end
 
