@@ -34,4 +34,11 @@ describe FarMar::Sale do
     expect(array.length).must_equal(12798)
   end
 
+#5
+  it "Vendor method finds the appropriate vendor's information for a given sale" do
+    sale1 = FarMar::Sale.new({id: 2000, amount: 25.10, vendor_id: 10, product_id: 300})
+    vendor1 = sale1.vendor
+    expect(vendor1.vendor_name).must_equal("Kertzmann LLC")
+  end
+
 end
