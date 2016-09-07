@@ -55,6 +55,7 @@ end
 
 # returns a collection of FarMar::Product instances that are associated by the FarMar::Product vendor_id field.
   def products
+    FarMar::Product.by_vendor(id)
   end
 
 # returns a collection of FarMar::Sale instances that are associated by the vendor_id field.
@@ -65,6 +66,7 @@ end
   def revenue
   end
 
+# returns all of the vendors with the given market_id
   def self.by_market(market_id)
     matching_vendor_array = []
     vendor_array = FarMar::Vendor.all?

@@ -50,4 +50,12 @@ describe FarMar::Vendor do
     expect(market1.name_of_market).must_equal("Silverdale Farmers Market")
   end
 
+#7
+  it "Vendor method returns a list of vendors with market ID" do
+    vendor2 = FarMar::Vendor.new({id: 8, name: "Matthew Pavilanis", num_employees: 1, market_id: 2})
+    products_array = []
+    products_array = vendor2.products
+    expect(products_array.length).must_equal(4)
+  end
+
 end

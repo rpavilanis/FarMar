@@ -49,7 +49,16 @@ end
   def number_of_sales
   end
 
+# returns all of the products with the given vendor_id
   def self.by_vendor(vendor_id)
+    matching_product_array = []
+    product_array = FarMar::Product.all?
+    product_array.each do |product|
+      if product.vendor_id == vendor_id
+        matching_product_array << product
+      end
+    end
+    return matching_product_array
   end
 
 

@@ -34,4 +34,12 @@ describe FarMar::Product do
     expect(array.length).must_equal(8193)
   end
 
+#5
+  it "Makes sure you can return appropriate number of products in an array when given a product id" do
+    FarMar::Product.all?
+    products_by_vendor = FarMar::Product.by_vendor(4)
+    expect(products_by_vendor.class).must_equal(Array)
+    expect(products_by_vendor.length).must_equal(3)
+  end
+
 end

@@ -50,7 +50,7 @@ end
    return matching_market
   end
 
-# for a specific market object, find the vendors who sell at it (so don't pass anything in)
+# find the vendors that sell at a specific market 
   def vendors
     FarMar::Vendor.by_market(id)
   end
