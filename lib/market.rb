@@ -50,9 +50,24 @@ end
    return matching_market
   end
 
-# find the vendors that sell at a specific market 
+# find the vendors that sell at a specific market
   def vendors
     FarMar::Vendor.by_market(id)
+  end
+
+# OPTIONAL: products returns a collection of FarMar::Product instances that are associated to the market through the FarMar::Vendor class.
+  def products
+    products_at_market = []
+    vendors_at_market = self.vendors
+    vendors_at_market.each do |vendor|
+        products_at_market << vendor.products
+    end
+    return products_at_market.flatten
+  end
+
+# self.search(search_term) returns a collection of FarMar::Market instances where the market name or vendor name contain the search_term. For example FarMar::Market.search('school') would return 3 results, one being the market with id 75 (Fox School Farmers FarMar::Market).
+  def self.search(search_term)
+
   end
 
 end

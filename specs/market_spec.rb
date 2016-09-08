@@ -41,4 +41,9 @@ describe FarMar::Market do
     expect(vendors_array.length).must_equal(6)
   end
 
+#6
+  it "OPTIONAL: Products returns a collection products that are associated with the market." do
+    expect(market1.products.length).must_equal(13)
+  end
+
 end
