@@ -83,8 +83,4 @@ end
     return matching_product_array
   end
 
-
-
-
-
 end
