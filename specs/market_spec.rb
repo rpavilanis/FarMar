@@ -9,7 +9,7 @@ describe FarMar::Market do
   let (:market2){
     FarMar::Market.new({id: 502, name_of_market: "Corvallis Farmers Market", address: "1300 Oak Street", city: "Corvallis", county: "Lane", state: "Oregon", zip: "97405"})
   }
-  let (:market_all?) {FarMar::Market.all?}
+  let (:market_all ) {FarMar::Market.all }
 
 #1
   it "Makes sure you can create an instance of market with various attributes" do
@@ -30,15 +30,13 @@ describe FarMar::Market do
 
 # 3
   it "Makes sure that file you read in is appropriate length, and that it is an array" do
-    expect(market_all?.class).must_equal(Array)
-    expect(market_all?.length).must_equal(500)
+    expect(market_all.class).must_equal(Array)
+    expect(market_all.length).must_equal(500)
   end
 
 #4
   it "Vendor method returns a list of vendors with market ID" do
-    vendors_array = []
-    vendors_array = market1.vendors
-    expect(vendors_array.length).must_equal(6)
+    expect(market1.vendors.length).must_equal(6)
   end
 
 #6
@@ -49,6 +47,11 @@ describe FarMar::Market do
 #7
   it "OPTIONAL: self.search(search_term) returns markets that match search term" do
     expect(FarMar::Market.search('Fairfax').length).must_equal(2)
+  end
+
+#8
+  it "OPTIONAL: # returns vendor with highest revenue" do
+    expect(market1.preferred_vendor).must_equal(61749)
   end
 
 end

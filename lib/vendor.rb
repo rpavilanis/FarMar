@@ -15,7 +15,7 @@ attr_reader :id, :vendor_name, :market_id, :num_employees
 
 # reads in CSV file
 # returns a collection of markets
-def self.all?
+def self.all
 
   vendor = []
   vendor_hash = {}
@@ -34,7 +34,7 @@ end
 # returns an instance of object where value of id field in the CSV matches passed parameter
   def self.find(id_num)
     matching_vendor = []
-    vendor_array = FarMar::Vendor.all?
+    vendor_array = FarMar::Vendor.all
     vendor_array.each do |vendor|
       if vendor.id == id_num
         matching_vendor = vendor
@@ -45,7 +45,7 @@ end
 
 # matches the FarMar::Vendor market_id field with appropriate id in FarMar::Market
   def market
-    market_array = FarMar::Market.all?
+    market_array = FarMar::Market.all
     market_array.each do |market|
       if market.id == market_id
         return market
@@ -61,7 +61,7 @@ end
 # returns a collection of FarMar::Sale instances that are associated by the vendor_id field.
   def sales
     matching_sales_array = []
-    sales_array = FarMar::Sale.all?
+    sales_array = FarMar::Sale.all
     sales_array.each do |sale|
       if sale.vendor_id == id
         matching_sales_array << sale
@@ -82,7 +82,7 @@ end
 # returns all of the vendors with the given market_id
   def self.by_market(market_id)
     matching_vendor_array = []
-    vendor_array = FarMar::Vendor.all?
+    vendor_array = FarMar::Vendor.all
     vendor_array.each do |vendor|
       if vendor.market_id == market_id
         matching_vendor_array << vendor
@@ -90,5 +90,5 @@ end
     end
     return matching_vendor_array
   end
-  
+
 end

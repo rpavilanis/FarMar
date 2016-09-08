@@ -19,7 +19,7 @@ attr_reader :id, :name_of_market, :address, :city, :county, :state, :zip
 
 # reads in CSV file
 # returns a collection of markets
-def self.all?
+def self.all
 
   markets = []
   market_hash = {}
@@ -41,7 +41,7 @@ end
 # returns an instance of object where value of id field in the CSV matches passed parameter
   def self.find(id_num)
     matching_market = []
-    market_array = FarMar::Market.all?
+    market_array = FarMar::Market.all
     market_array.each do |market|
       if market.id == id_num
         matching_market = market
@@ -68,14 +68,26 @@ end
 # OPTIONAL: self.search(search_term) returns a collection of FarMar::Market instances where the market name or vendor name contain the search_term. For example FarMar::Market.search('school') would return 3 results, one being the market with id 75 (Fox School Farmers FarMar::Market).
   def self.search(search_term)
     matching_markets = []
-    market_array = FarMar::Market.all?
+    market_array = FarMar::Market.all
     market_array.each do |market|
       if market.name_of_market.include? search_term.to_s
         matching_markets << market
       end
     end
    return matching_markets
-
   end
+
+# returns vendor with highest revenue
+def preferred_vendor
+  highest_selling_vendor_amount = 0
+  highest_selling_vendor = []
+  vendors.each do |vendor|
+    if vendor.revenue > highest_selling_vendor_amount
+      highest_selling_vendor_amount = vendor.revenue
+      highest_selling_vendor = vendor
+    end
+  end
+  return highest_selling_vendor_amount
+end
 
 end

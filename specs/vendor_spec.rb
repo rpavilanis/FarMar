@@ -4,7 +4,7 @@ require_relative '../lib/vendor'
 describe FarMar::Vendor do
   let (:vendor1){FarMar::Vendor.new({id: 7, vendor_name: "Rachel Pavilanis", num_employees: 1, market_id: 2})}
   let (:vendor2){FarMar::Vendor.new({id: 8, vendor_name: "Matthew Pavilanis", num_employees: 1, market_id: 2})}
-  let (:vendor_all?) {FarMar::Vendor.all?}
+  let (:vendor_all ) {FarMar::Vendor.all }
 #1
   it "Makes sure you can create an instance of vendor with various attributes" do
     # vendor1 = FarMar::Vendor.new({id: 501, vendor_name: "Rachel Pavilanis", num_employees: 1, market_id: 502})
@@ -23,8 +23,8 @@ describe FarMar::Vendor do
 
 # 3
   it "Makes sure that multiple instances of created vendors are stored in an array of appropriate length" do
-    expect(vendor_all?.class).must_equal(Array)
-    expect(vendor_all?.length).must_equal(2690)
+    expect(vendor_all .class).must_equal(Array)
+    expect(vendor_all .length).must_equal(2690)
   end
 
 #4

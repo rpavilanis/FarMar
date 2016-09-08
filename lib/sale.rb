@@ -1,5 +1,4 @@
 require_relative "../far_mar.rb"
-require 'date'
 
 class FarMar::Sale
 
@@ -17,7 +16,7 @@ class FarMar::Sale
 
   # reads in CSV file
   # returns a collection of markets
-  def self.all?
+  def self.all
 
     sales = []
     sales_hash = {}
@@ -37,7 +36,7 @@ class FarMar::Sale
 
 # returns an instance of object where value of id field in the CSV matches passed parameter
     def self.find(id_num)
-      sales_array = FarMar::Sale.all?
+      sales_array = FarMar::Sale.all
       sales_array.each do |sale|
         if sale.id == id_num
           matching_sale = sale
@@ -48,7 +47,7 @@ class FarMar::Sale
 
 # returns the FarMar::Vendor instance that is associated with this sale using the FarMar::Sale vendor_id field
   def vendor
-    vendor_array = FarMar::Vendor.all?
+    vendor_array = FarMar::Vendor.all
     vendor_array.each do |vendor|
       if vendor.id == vendor_id
         return vendor
@@ -58,7 +57,7 @@ class FarMar::Sale
 
 # returns the FarMar::Product instance that is associated with this sale using the FarMar::Sale product_id field
   def product
-    product_array = FarMar::Product.all?
+    product_array = FarMar::Product.all
     product_array.each do |product|
       if product.id == product_id
         return product
@@ -68,7 +67,7 @@ class FarMar::Sale
 
 # returns a collection of FarMar::Sale objects where the purchase time is between the two times given as arguments
   def self.between(beginning_time, end_time)
-    sales_array = FarMar::Sale.all?
+    sales_array = FarMar::Sale.all
     sales_matching_time_range = []
 
     beginning_time = DateTime.strptime(beginning_time, "%Y-%m-%d %H:%M:%S %z")
@@ -83,4 +82,5 @@ class FarMar::Sale
       return sales_matching_time_range
 
   end
+
 end

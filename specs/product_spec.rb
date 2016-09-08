@@ -4,7 +4,7 @@ require_relative '../lib/product'
 describe FarMar::Product do
   let (:product1){FarMar::Product.new({id: 9, product_name: "egg cartons", vendor_id: 8})}
   let (:product2){FarMar::Product.new({id: 14, product_name: "decorative clocks", vendor_id: 8})}
-  let (:product_all?){FarMar::Product.all?}
+  let (:product_all ){FarMar::Product.all }
 
 #1
   it "Makes sure you can create an instance of product with various attributes" do
@@ -22,8 +22,8 @@ describe FarMar::Product do
 
 # 3
   it "Makes sure that multiple instances of product are an array and file you read in is appropriate length" do
-    expect(product_all?.class).must_equal(Array)
-    expect(product_all?.length).must_equal(8193)
+    expect(product_all .class).must_equal(Array)
+    expect(product_all .length).must_equal(8193)
   end
 
 #4

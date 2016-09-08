@@ -3,7 +3,7 @@ require_relative '../lib/sale'
 
 describe FarMar::Sale do
   let (:sale1){FarMar::Sale.new({id: 2000, amount: 25.10, vendor_id: 10, product_id: 20})}
-  let (:sale_all?){FarMar::Sale.all?}
+  let (:sale_all ){FarMar::Sale.all }
 
 #1
   it "Makes sure you can create an instance of sale with various attributes" do
@@ -21,8 +21,8 @@ describe FarMar::Sale do
 
 # 3
   it "Makes sure that multiple instances of sale are an array and that it is appropriate length" do
-    expect(sale_all?.class).must_equal(Array)
-    expect(sale_all?.length).must_equal(12798)
+    expect(sale_all .class).must_equal(Array)
+    expect(sale_all .length).must_equal(12798)
   end
 
 #4
