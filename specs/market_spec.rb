@@ -46,4 +46,9 @@ describe FarMar::Market do
     expect(market1.products.length).must_equal(13)
   end
 
+#7
+  it "OPTIONAL: self.search(search_term) returns markets that match search term" do
+    expect(FarMar::Market.search('Fairfax').length).must_equal(2)
+  end
+
 end

@@ -65,8 +65,16 @@ end
     return products_at_market.flatten
   end
 
-# self.search(search_term) returns a collection of FarMar::Market instances where the market name or vendor name contain the search_term. For example FarMar::Market.search('school') would return 3 results, one being the market with id 75 (Fox School Farmers FarMar::Market).
+# OPTIONAL: self.search(search_term) returns a collection of FarMar::Market instances where the market name or vendor name contain the search_term. For example FarMar::Market.search('school') would return 3 results, one being the market with id 75 (Fox School Farmers FarMar::Market).
   def self.search(search_term)
+    matching_markets = []
+    market_array = FarMar::Market.all?
+    market_array.each do |market|
+      if market.name_of_market.include? search_term.to_s
+        matching_markets << market
+      end
+    end
+   return matching_markets
 
   end
 
