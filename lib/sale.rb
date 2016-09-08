@@ -10,7 +10,7 @@ class FarMar::Sale
     def initialize(sales_hash)
       @id = sales_hash[:id]
       @amount = sales_hash[:amount]
-      @purchase_time = sales_hash[:purchase_time].to_datetime
+      @purchase_time = sales_hash[:purchase_time] #add to_datetime
       @vendor_id = sales_hash[:vendor_id]
       @product_id = sales_hash[:product_id]
     end
@@ -69,21 +69,14 @@ class FarMar::Sale
 # returns a collection of FarMar::Sale objects where the purchase time is between the two times given as arguments
   def self.between(beginning_time, end_time)
     sales_array = FarMar::Sale.all?
-    # date_from = Date.parse(beginning_time)
-    # date_to = Date.parse(end_time)
-    # date_range = date_from..date_to
-    # date_range = end_time - beginning_time
-    # sales_between = sales_array.map {|sale|  sale.purchase_time.include? date_range }
-    #
-    # return sales_between
-    # need to use parse to correctly format dates
     sales_matching_time_range = []
-    beginning_time = Date.new(beginning_time)
-    end_time = Date.new(end_time)
-    beginning_time = Date.parse()
-    end_time = Date.parse()
+
+    beginning_time = DateTime.strptime(beginning_time, "%Y-%m-%d %H:%M:%S %z")
+    end_time = DateTime.strptime(end_time, "%Y-%m-%d %H:%M:%S %z")
+
     sales_array.each do |sale|
-      if purchase_time >= Date.new(beginning_time) && purchase_time <= Date.new(end_time)
+      purchase_time = DateTime.strptime(sale.purchase_time, "%Y-%m-%d %H:%M:%S %z")
+      if purchase_time >= beginning_time && purchase_time <= end_time
         sales_matching_time_range << sale
       end
     end

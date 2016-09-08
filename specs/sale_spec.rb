@@ -46,4 +46,10 @@ describe FarMar::Sale do
     product1 = sale1.product
     expect(product1.product_name).must_equal("Tall Pretzel")
   end
+
+  it "self.between returns an array of correct length" do
+     expect(FarMar::Sale.between('2013-11-07 04:34:56 -08:00', '2013-11-07 04:38:48 -08:00').class).must_equal(Array)
+     expect(FarMar::Sale.between('2013-11-07 04:34:56 -08:00', '2013-11-07 04:38:48 -08:00').length).must_equal(4)
+  end
+
 end
