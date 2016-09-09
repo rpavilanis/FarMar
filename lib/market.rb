@@ -90,38 +90,23 @@ class FarMar::Market
         end
       end
       return highest_selling_vendor
-    else
-      date = DateTime.strptime(date, "%Y-%m-%d %H:%M:%S %z")
-      vendors.each do |vendor|
-        purchase_time = DateTime.strptime(vendor.purchase_time, "%Y-%m-%d %H:%M:%S %z")
-        if purchase_time.include? date
-          if vendor.revenue > highest_selling_vendor_amount
-            highest_selling_vendor_amount = vendor.revenue
-            highest_selling_vendor = vendor
-          end
-        end
-        return highest_selling_vendor
-      end
-    end
-  end
-
-    # returns the vendor with the highest revenue for the given date - not working - need to refactor
-    # def preferred_vendor(date)
-    #   date = DateTime.strptime(date, "%Y-%m-%d %H:%M:%S %z")
-    #   highest_selling_vendor_amount = 0
-    #   highest_selling_vendor = ""
-    #   vendors.each do |vendor|
-    #     purchase_time = DateTime.strptime(FarMar::Sale.purchase_time, "%Y-%m-%d %H:%M:%S %z")
-    #     if vendor.purchase_time.include? date
-    #       if vendor.revenue > highest_selling_vendor_amount
-    #         highest_selling_vendor_amount = vendor.revenue
-    #         highest_selling_vendor = vendor
+    # else
+    #   sales = FarMar::Sale.between("#{date} 00:00:00", "#{date} 24:59:59")
+    #   # sales = FarMar::Sale.all
+    #   sales.each do |sale|
+    #     # purchase_time = DateTime.parse(sale.purchase_time)
+    #     vendors.each do |vendor|
+    #       # if purchase_time === date
+    #         if vendor.revenue > highest_selling_vendor_amount
+    #           highest_selling_vendor_amount = vendor.revenue
+    #           highest_selling_vendor = vendor
+    #         end
     #       end
     #     end
-    #   return highest_selling_vendor
-    # end
-
-    # end
+    #   # end
+    #     return highest_selling_vendor
+    end
+  end
 
     # returns vendor with worst revenue
     def worst_vendor(date = nil) # google optional argument (split up into other methods to call inside here)
@@ -135,5 +120,6 @@ class FarMar::Market
       end
       return lowest_selling_vendor
     end
+
 
 end

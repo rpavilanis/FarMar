@@ -82,10 +82,7 @@ end
       return total_vendor_sales
     else
       total_vendor_sales_on_date = 0
-
       sales.each do |sale|
-        # date = DateTime.strptime(date, "%Y-%m-%d %H:%M:%S")
-        # if date >= purchase_time_begin && date <= purchase_time_end
         purchase_time = DateTime.parse(sale.purchase_time)
         if date === purchase_time
           total_vendor_sales_on_date += sale.amount
