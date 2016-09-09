@@ -61,10 +61,4 @@ describe FarMar::Market do
     expect(vendor1.vendor_name).must_equal("Zulauf and Sons")
   end
 
-# #9 not currently working - need to refactor
-#   it "OPTIONAL: # returns vendor with highest revenue on a certain date" do
-#     vendor1 = market1.preferred_vendor('2013-11-07 04:34:56 -08:00')
-#     expect(vendor1.vendor_name).must_equal("Zulauf and Sons")
-#   end
-
 end

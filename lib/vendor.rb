@@ -1,4 +1,5 @@
 require_relative "../far_mar.rb"
+require "date"
 
 class FarMar::Vendor
 
@@ -71,12 +72,27 @@ end
   end
 
 # returns the the sum of all of the vendor's sales (in cents)
-  def revenue
-    total_vendor_sales = 0
-    sales.each do |sale|
-      total_vendor_sales += sale.amount
+# if given a date, returns the total revenue for that specific purchase time and vendor instance
+  def revenue(date = nil)
+    if date == nil
+      total_vendor_sales = 0
+      sales.each do |sale|
+        total_vendor_sales += sale.amount
+      end
+      return total_vendor_sales
+    else
+      total_vendor_sales_on_date = 0
+
+      sales.each do |sale|
+        # date = DateTime.strptime(date, "%Y-%m-%d %H:%M:%S")
+        # if date >= purchase_time_begin && date <= purchase_time_end
+        purchase_time = DateTime.parse(sale.purchase_time)
+        if date === purchase_time
+          total_vendor_sales_on_date += sale.amount
+        end
+      end
+      return total_vendor_sales_on_date
     end
-    return total_vendor_sales
   end
 
 # returns all of the vendors with the given market_id
@@ -90,30 +106,5 @@ end
     end
     return matching_vendor_array
   end
-
-# returns the top n vendor instances ranked by total revenue
-  # def self.most_revenue(n)
-  #
-  #
-  # end
-
-# returns the total revenue for that specific purchase time and vendor instance
-  def revenue(date)
-    total_vendor_sales_on_date = 0
-    vendor_sales = self.sales
-    vendor_sales.each do |vendor|
-      purchase_time = DateTime.strptime(vendor.purchase_time, "%Y-%m-%d %H:%M:%S")
-      if date === purchase_time
-        total_vendor_sales_on_date += vendor.amount
-      end
-    end
-    return total_vendor_sales_on_date
-  end
-
-# returns the total revenue for that date across all vendors
-  # def self.revenue(date)
-  #
-  #
-  # end
 
 end

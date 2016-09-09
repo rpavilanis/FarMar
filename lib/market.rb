@@ -3,10 +3,10 @@ require_relative '../far_mar.rb'
 
 class FarMar::Market
 
-attr_accessor :markets
-attr_reader :id, :name_of_market, :address, :city, :county, :state, :zip
+  attr_accessor :markets
+  attr_reader :id, :name_of_market, :address, :city, :county, :state, :zip
 
-# initializes market_hash
+  # initializes market_hash
   def initialize(market_hash)
     @id = market_hash[:id]
     @name_of_market = market_hash[:name_of_market]
@@ -17,28 +17,28 @@ attr_reader :id, :name_of_market, :address, :city, :county, :state, :zip
     @zip = market_hash[:zip]
   end
 
-# reads in CSV file
-# returns a collection of markets
-def self.all
+  # reads in CSV file
+  # returns a collection of markets
+  def self.all
 
-  markets = []
-  market_hash = {}
+    markets = []
+    market_hash = {}
 
-  CSV.open("./support/markets.csv", 'r').each do |line|
-    market_hash[:id] = line[0].to_i
-    market_hash[:name_of_market] = line[1]
-    market_hash[:address] = line[2]
-    market_hash[:city] = line[3]
-    market_hash[:county] = line[4]
-    market_hash[:state] = line[5]
-    market_hash[:zip] = line[6]
-    markets << FarMar::Market.new(market_hash)
+    CSV.open("./support/markets.csv", 'r').each do |line|
+      market_hash[:id] = line[0].to_i
+      market_hash[:name_of_market] = line[1]
+      market_hash[:address] = line[2]
+      market_hash[:city] = line[3]
+      market_hash[:county] = line[4]
+      market_hash[:state] = line[5]
+      market_hash[:zip] = line[6]
+      markets << FarMar::Market.new(market_hash)
+    end
+
+    return markets
   end
 
-  return markets
-end
-
-# returns an instance of object where value of id field in the CSV matches passed parameter
+  # returns an instance of object where value of id field in the CSV matches passed parameter
   def self.find(id_num)
     matching_market = []
     market_array = FarMar::Market.all
@@ -47,25 +47,25 @@ end
         matching_market = market
       end
     end
-   return matching_market
+    return matching_market
   end
 
-# find the vendors that sell at a specific market
+  # find the vendors that sell at a specific market
   def vendors
     FarMar::Vendor.by_market(id)
   end
 
-# OPTIONAL: products returns a collection of FarMar::Product instances that are associated to the market through the FarMar::Vendor class.
+  # OPTIONAL: products returns a collection of FarMar::Product instances that are associated to the market through the FarMar::Vendor class.
   def products
     products_at_market = []
     vendors_at_market = self.vendors
     vendors_at_market.each do |vendor|
-        products_at_market << vendor.products
+      products_at_market << vendor.products
     end
     return products_at_market.flatten
   end
 
-# OPTIONAL: self.search(search_term) returns a collection of FarMar::Market instances where the market name or vendor name contain the search_term. For example FarMar::Market.search('school') would return 3 results, one being the market with id 75 (Fox School Farmers FarMar::Market).
+  # OPTIONAL: self.search(search_term) returns a collection of FarMar::Market instances where the market name or vendor name contain the search_term. For example FarMar::Market.search('school') would return 3 results, one being the market with id 75 (Fox School Farmers FarMar::Market).
   def self.search(search_term)
     matching_markets = []
     market_array = FarMar::Market.all
@@ -74,55 +74,66 @@ end
         matching_markets << market
       end
     end
-   return matching_markets
+    return matching_markets
   end
 
   # returns vendor with highest revenue
-  def preferred_vendor
+  # returns the vendor with the highest revenue for the given date
+  def preferred_vendor(date = nil)
     highest_selling_vendor_amount = 0
     highest_selling_vendor = ""
-    vendors.each do |vendor|
-      if vendor.revenue > highest_selling_vendor_amount
-        highest_selling_vendor_amount = vendor.revenue
-        highest_selling_vendor = vendor
+    if date == nil
+      vendors.each do |vendor|
+        if vendor.revenue > highest_selling_vendor_amount
+          highest_selling_vendor_amount = vendor.revenue
+          highest_selling_vendor = vendor
+        end
+      end
+      return highest_selling_vendor
+    else
+      date = DateTime.strptime(date, "%Y-%m-%d %H:%M:%S %z")
+      vendors.each do |vendor|
+        purchase_time = DateTime.strptime(vendor.purchase_time, "%Y-%m-%d %H:%M:%S %z")
+        if purchase_time.include? date
+          if vendor.revenue > highest_selling_vendor_amount
+            highest_selling_vendor_amount = vendor.revenue
+            highest_selling_vendor = vendor
+          end
+        end
+        return highest_selling_vendor
       end
     end
-    return highest_selling_vendor
   end
 
-  # returns the vendor with the highest revenue for the given date - not working - need to refactor
-  # def preferred_vendor(date)
-  #   date = DateTime.strptime(date, "%Y-%m-%d %H:%M:%S %z")
-  #   highest_selling_vendor_amount = 0
-  #   highest_selling_vendor = ""
-  #   vendors.each do |vendor|
-  #     purchase_time = DateTime.strptime(FarMar::Sale.purchase_time, "%Y-%m-%d %H:%M:%S %z")
-  #     if vendor.purchase_time.include? date
-  #       if vendor.revenue > highest_selling_vendor_amount
-  #         highest_selling_vendor_amount = vendor.revenue
-  #         highest_selling_vendor = vendor
-  #       end
-  #     end
-  #   return highest_selling_vendor
-  # end
+    # returns the vendor with the highest revenue for the given date - not working - need to refactor
+    # def preferred_vendor(date)
+    #   date = DateTime.strptime(date, "%Y-%m-%d %H:%M:%S %z")
+    #   highest_selling_vendor_amount = 0
+    #   highest_selling_vendor = ""
+    #   vendors.each do |vendor|
+    #     purchase_time = DateTime.strptime(FarMar::Sale.purchase_time, "%Y-%m-%d %H:%M:%S %z")
+    #     if vendor.purchase_time.include? date
+    #       if vendor.revenue > highest_selling_vendor_amount
+    #         highest_selling_vendor_amount = vendor.revenue
+    #         highest_selling_vendor = vendor
+    #       end
+    #     end
+    #   return highest_selling_vendor
+    # end
 
-  # end
+    # end
 
-  # returns vendor with worst revenue
-  def worst_vendor # google optional argument (split up into other methods to call inside here)
-    lowest_selling_vendor_amount = 1000000000000000 #I know there must be a better way to do this lol
-    lowest_selling_vendor = ""
-    vendors.each do |vendor|
-      if vendor.revenue < lowest_selling_vendor_amount
-        lowest_selling_vendor_amount = vendor.revenue
-        lowest_selling_vendor = vendor
+    # returns vendor with worst revenue
+    def worst_vendor(date = nil) # google optional argument (split up into other methods to call inside here)
+      lowest_selling_vendor_amount = 1000000000000000 #I know there must be a better way to do this lol
+      lowest_selling_vendor = ""
+      vendors.each do |vendor|
+        if vendor.revenue < lowest_selling_vendor_amount
+          lowest_selling_vendor_amount = vendor.revenue
+          lowest_selling_vendor = vendor
+        end
       end
+      return lowest_selling_vendor
     end
-    return lowest_selling_vendor
-  end
-
-  # returns the vendor with the lowest revenue on the given date
-  # def worst_vendor(date)
-  # end
 
 end
