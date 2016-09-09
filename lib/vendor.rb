@@ -102,7 +102,8 @@ end
     total_vendor_sales_on_date = 0
     vendor_sales = self.sales
     vendor_sales.each do |vendor|
-      if date === vendor.purchase_time
+      purchase_time = DateTime.strptime(vendor.purchase_time, "%Y-%m-%d %H:%M:%S")
+      if date === purchase_time
         total_vendor_sales_on_date += vendor.amount
       end
     end
