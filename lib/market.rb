@@ -77,30 +77,52 @@ end
    return matching_markets
   end
 
-# returns vendor with highest revenue
-def preferred_vendor
-  highest_selling_vendor_amount = 0
-  highest_selling_vendor = ""
-  vendors.each do |vendor|
-    if vendor.revenue > highest_selling_vendor_amount
-      highest_selling_vendor_amount = vendor.revenue
-      highest_selling_vendor = vendor
+  # returns vendor with highest revenue
+  def preferred_vendor
+    highest_selling_vendor_amount = 0
+    highest_selling_vendor = ""
+    vendors.each do |vendor|
+      if vendor.revenue > highest_selling_vendor_amount
+        highest_selling_vendor_amount = vendor.revenue
+        highest_selling_vendor = vendor
+      end
     end
+    return highest_selling_vendor
   end
-  return highest_selling_vendor
-end
 
-# returns vendor with worst revenue
-def worst_vendor
-  lowest_selling_vendor_amount = 1000000000000000
-  lowest_selling_vendor = ""
-  vendors.each do |vendor|
-    if vendor.revenue < lowest_selling_vendor_amount
-      lowest_selling_vendor_amount = vendor.revenue
-      lowest_selling_vendor = vendor
+  # returns the vendor with the highest revenue for the given date - not working - need to refactor
+  # def preferred_vendor(date)
+  #   date = DateTime.strptime(date, "%Y-%m-%d %H:%M:%S %z")
+  #   highest_selling_vendor_amount = 0
+  #   highest_selling_vendor = ""
+  #   vendors.each do |vendor|
+  #     purchase_time = DateTime.strptime(FarMar::Sale.purchase_time, "%Y-%m-%d %H:%M:%S %z")
+  #     if vendor.purchase_time.include? date
+  #       if vendor.revenue > highest_selling_vendor_amount
+  #         highest_selling_vendor_amount = vendor.revenue
+  #         highest_selling_vendor = vendor
+  #       end
+  #     end
+  #   return highest_selling_vendor
+  # end
+
+  # end
+
+  # returns vendor with worst revenue
+  def worst_vendor # google optional argument (split up into other methods to call inside here)
+    lowest_selling_vendor_amount = 1000000000000000 #I know there must be a better way to do this lol
+    lowest_selling_vendor = ""
+    vendors.each do |vendor|
+      if vendor.revenue < lowest_selling_vendor_amount
+        lowest_selling_vendor_amount = vendor.revenue
+        lowest_selling_vendor = vendor
+      end
     end
+    return lowest_selling_vendor
   end
-  return lowest_selling_vendor
-end
+
+  # returns the vendor with the lowest revenue on the given date
+  # def worst_vendor(date)
+  # end
 
 end

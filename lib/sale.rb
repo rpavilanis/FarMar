@@ -9,7 +9,7 @@ class FarMar::Sale
     def initialize(sales_hash)
       @id = sales_hash[:id]
       @amount = sales_hash[:amount]
-      @purchase_time = sales_hash[:purchase_time] #add to_datetime
+      @purchase_time = sales_hash[:purchase_time]
       @vendor_id = sales_hash[:vendor_id]
       @product_id = sales_hash[:product_id]
     end
@@ -24,7 +24,7 @@ class FarMar::Sale
     CSV.open("./support/sales.csv", 'r').each do |line|
       sales_hash[:id] = line[0].to_i
       sales_hash[:amount] = line[1].to_i
-      sales_hash[:purchase_time] = line[2]
+      sales_hash[:purchase_time] = DateTime.parse(line[2])
       sales_hash[:vendor_id] = line[3].to_i
       sales_hash[:product_id] = line[4].to_i
       sales << FarMar::Sale.new(sales_hash)
@@ -70,12 +70,12 @@ class FarMar::Sale
     sales_array = FarMar::Sale.all
     sales_matching_time_range = []
 
-    beginning_time = DateTime.strptime(beginning_time, "%Y-%m-%d %H:%M:%S %z")
-    end_time = DateTime.strptime(end_time, "%Y-%m-%d %H:%M:%S %z")
+    # beginning_time = DateTime.strptime(beginning_time, "%Y-%m-%d %H:%M:%S %z")
+    # end_time = DateTime.strptime(end_time, "%Y-%m-%d %H:%M:%S %z")
 
     sales_array.each do |sale|
-      purchase_time = DateTime.strptime(sale.purchase_time, "%Y-%m-%d %H:%M:%S %z")
-      if purchase_time >= beginning_time && purchase_time <= end_time
+      # purchase_time = DateTime.strptime(sale.purchase_time, "%Y-%m-%d %H:%M:%S %z")
+      if sale.purchase_time >= beginning_time && sale.purchase_time <= end_time
         sales_matching_time_range << sale
       end
     end

@@ -37,8 +37,9 @@ describe FarMar::Sale do
   end
 #6
   it "self.between returns an array of correct length" do
-     expect(FarMar::Sale.between('2013-11-07 04:34:56 -08:00', '2013-11-07 04:38:48 -08:00').class).must_equal(Array)
-     expect(FarMar::Sale.between('2013-11-07 04:34:56 -08:00', '2013-11-07 04:38:48 -08:00').length).must_equal(4)
+     expect(FarMar::Sale.between(DateTime.parse('2013-11-07 04:34:56'), DateTime.parse('2013-11-07 04:38:48')).class).must_equal(Array)
+
+     expect(FarMar::Sale.between(DateTime.parse('2013-11-07 04:34:56'), DateTime.parse('2013-11-07 04:38:48')).length).must_equal(2)
   end
 
 end

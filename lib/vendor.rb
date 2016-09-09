@@ -91,4 +91,28 @@ end
     return matching_vendor_array
   end
 
+# returns the top n vendor instances ranked by total revenue
+  # def self.most_revenue(n)
+  #
+  #
+  # end
+
+# returns the total revenue for that specific purchase time and vendor instance
+  def revenue(date)
+    total_vendor_sales_on_date = 0
+    vendor_sales = self.sales
+    vendor_sales.each do |vendor|
+      if date === vendor.purchase_time
+        total_vendor_sales_on_date += vendor.amount
+      end
+    end
+    return total_vendor_sales_on_date
+  end
+
+# returns the total revenue for that date across all vendors
+  # def self.revenue(date)
+  #
+  #
+  # end
+
 end

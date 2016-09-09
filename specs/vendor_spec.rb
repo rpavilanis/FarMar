@@ -55,4 +55,9 @@ describe FarMar::Vendor do
   expect(vendor2.revenue).must_equal(56038)
   end
 
+#10
+  it "OPTIONAL: # returns vendor's revenue on a certain date" do
+    expect(vendor1.revenue(DateTime.parse('2013-11-07 04:34:56'))).must_equal(12377)
+  end
+
 end

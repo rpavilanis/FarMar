@@ -39,26 +39,32 @@ describe FarMar::Market do
     expect(market1.vendors.length).must_equal(6)
   end
 
-#6
+#5
   it "OPTIONAL: Products returns a collection products that are associated with the market." do
     expect(market1.products.length).must_equal(13)
   end
 
-#7
+#6
   it "OPTIONAL: self.search(search_term) returns markets that match search term" do
     expect(FarMar::Market.search('Fairfax').length).must_equal(2)
   end
 
-#8
+#7
   it "OPTIONAL: # returns vendor with highest revenue" do
     vendor1 = market1.preferred_vendor
     expect(vendor1.vendor_name).must_equal("Reynolds, Schmitt and Klocko")
   end
 
-#9
+#8
   it "OPTIONAL: # returns vendor with worst revenue" do
     vendor1 = market1.worst_vendor
     expect(vendor1.vendor_name).must_equal("Zulauf and Sons")
   end
+
+# #9 not currently working - need to refactor
+#   it "OPTIONAL: # returns vendor with highest revenue on a certain date" do
+#     vendor1 = market1.preferred_vendor('2013-11-07 04:34:56 -08:00')
+#     expect(vendor1.vendor_name).must_equal("Zulauf and Sons")
+#   end
 
 end
