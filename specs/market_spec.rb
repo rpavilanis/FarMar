@@ -51,7 +51,14 @@ describe FarMar::Market do
 
 #8
   it "OPTIONAL: # returns vendor with highest revenue" do
-    expect(market1.preferred_vendor).must_equal(61749)
+    vendor1 = market1.preferred_vendor
+    expect(vendor1.vendor_name).must_equal("Reynolds, Schmitt and Klocko")
+  end
+
+#9
+  it "OPTIONAL: # returns vendor with worst revenue" do
+    vendor1 = market1.worst_vendor
+    expect(vendor1.vendor_name).must_equal("Zulauf and Sons")
   end
 
 end

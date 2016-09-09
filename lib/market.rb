@@ -80,14 +80,27 @@ end
 # returns vendor with highest revenue
 def preferred_vendor
   highest_selling_vendor_amount = 0
-  highest_selling_vendor = []
+  highest_selling_vendor = ""
   vendors.each do |vendor|
     if vendor.revenue > highest_selling_vendor_amount
       highest_selling_vendor_amount = vendor.revenue
       highest_selling_vendor = vendor
     end
   end
-  return highest_selling_vendor_amount
+  return highest_selling_vendor
+end
+
+# returns vendor with worst revenue
+def worst_vendor
+  lowest_selling_vendor_amount = 1000000000000000
+  lowest_selling_vendor = ""
+  vendors.each do |vendor|
+    if vendor.revenue < lowest_selling_vendor_amount
+      lowest_selling_vendor_amount = vendor.revenue
+      lowest_selling_vendor = vendor
+    end
+  end
+  return lowest_selling_vendor
 end
 
 end
